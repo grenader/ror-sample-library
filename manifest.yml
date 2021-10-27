@@ -1,0 +1,9 @@
+---
+applications:
+- name: cf-rails-igor-freetds-new
+  memory: 512M
+  instances: 1
+  random-route: true
+  buildpacks:
+  - https://github.com/starkandwayne/freetds-buildpack
+  - ruby_buildpack

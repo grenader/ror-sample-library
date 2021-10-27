@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app-name: ror-library-deploy
+    process: web
+  name: web-library-web
+spec:
+  selector:
+    matchLabels:
+      app-name: ror-library-web
+      process: web
+  template:
+    metadata:
+      labels:
+        app-name: ror-library-web
+        process: web
+    spec:
+      containers:
+      - env:
+        - name: PORT
+          value: "3000"
+#        envFrom:
+#        - configMapRef:
+#            name: bands-api
+        image: grenader/ror:library3
+        imagePullPolicy: IfNotPresent
+        name: library2-web
+        ports:
+        - containerPort: 3000
+          name: http
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 2
