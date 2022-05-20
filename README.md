@@ -1,24 +1,23 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a simple Ruby on Rails application to test deployments to
+- TAS ( VMware Tanzu Application Service)
+- Kubernetes
 
-Things you may want to cover:
+The latest version prints values of two environment variables.
+These environment variables could be set via Vault-Kubernetes integration. Look at the /k8s/deploy-service-vault.yaml file 
+to see how it is configured.
 
-* Ruby version
+## Build docker image
+docker build .
 
-* System dependencies
+## Run on docker (port 3300)
+docker run -p 3300:3000 <imageID>
 
-* Configuration
+## Tag and Push to DockerHub:
+docker tag <imageID> grenader/ror:library7
+docker push grenader/ror:library7
 
-* Database creation
+## Run the application on Kubernetes
+k apply -f k8s/deploy-service-vault.yaml
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

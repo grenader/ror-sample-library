@@ -4,7 +4,7 @@ metadata:
   labels:
     app-name: ror-library-deploy
     process: web
-  name: web-library-web-with-annotattions
+  name: ror-library-web-with-annotattions
 spec:
   selector:
     matchLabels:
@@ -15,10 +15,11 @@ spec:
       annotations:
         vault.hashicorp.com/agent-inject: "true"
         vault.hashicorp.com/role: "devweb-app"
-        vault.hashicorp.com/agent-inject-secret-database-config.txt: "secret/data/devwebapp/config"
-        vault.hashicorp.com/agent-inject-template-database-config.txt: |
+        vault.hashicorp.com/agent-inject-secret-vault-env.sh: "secret/data/devwebapp/config"
+        vault.hashicorp.com/agent-inject-template-vault-env.sh: |
           {{- with secret "secret/data/devwebapp/config" -}}
-          username={{ .Data.data.username }};password={{ .Data.data.password }}
+          VAULT_VAR1={{ .Data.data.username }}
+          VAULT_VAR2={{ .Data.data.password }}
           {{- end -}}      
       labels:
         app-name: ror-library-web
@@ -32,7 +33,7 @@ spec:
 #        envFrom:
 #        - configMapRef:
 #            name: bands-api
-        image: grenader/ror:library3
+        image: grenader/ror:library4
         imagePullPolicy: IfNotPresent
         name: library2-web
         ports:
