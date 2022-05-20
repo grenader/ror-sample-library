@@ -1,9 +1,8 @@
 ---
 applications:
-- name: cf-rails-igor-freetds-new
+- name: cf-rails-igor-fresh-new
   memory: 512M
   instances: 1
   random-route: true
   buildpacks:
-  - https://github.com/starkandwayne/freetds-buildpack
-  - ruby_buildpack
+    - https://github.com/cloudfoundry/ruby-buildpack.git
